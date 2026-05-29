@@ -1,5 +1,6 @@
 *.7z
 *.csv
 data/
-*config*
+*config.env
 *.log
+*.yml

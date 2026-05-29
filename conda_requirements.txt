@@ -164,6 +164,7 @@ openpyxl=3.1.2=py311h5eee18b_0
 openssl=3.0.13=h7f8727e_2
 packaging=23.2=py311h06a4308_0
 pandas=1.5.3=pypi_0
+python-dotenv=1.0.1=pypi_0
 parso=0.8.3=pyhd3eb1b0_0
 partd=1.4.0=pypi_0
 pathspec=0.12.1=pyhd8ed1ab_0

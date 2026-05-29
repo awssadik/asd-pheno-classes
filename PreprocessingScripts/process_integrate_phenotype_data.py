@@ -1,14 +1,21 @@
+import os
+
 import pandas as pd
+from dotenv import find_dotenv, load_dotenv
 
 
 def get_main_spark_data_for_GFMM():
     """
     Retrieve and integrate phenotype data from SPARK dataset.
     """
-    BASE_PHENO_DIR = '../SPARK_collection_v9_2022-12-12'
+    load_dotenv(find_dotenv('config.env'))
+    base_pheno_dir = os.environ.get('BASE_PHENO_DIR')
+
+    if not base_pheno_dir:
+        raise ValueError('BASE_PHENO_DIR must be set in the environment or config.env')
 
     ### SCQ
-    scqdf = pd.read_csv(f'{BASE_PHENO_DIR}/scq_2022-12-12.csv', header=0, index_col=None)
+    scqdf = pd.read_csv(f'{base_pheno_dir}/scq_2022-12-12.csv', header=0, index_col=None)
     scqdf = scqdf.loc[
         (scqdf['age_at_eval_years'] <= 18) & 
         (scqdf['missing_values'] < 1) & 
@@ -24,8 +31,8 @@ def get_main_spark_data_for_GFMM():
     scqdf['sex'] = scqdf['sex'].astype(int)
 
     ### BACKGROUND HISTORY
-    bhcdf = pd.read_csv(f'{BASE_PHENO_DIR}/background_history_child_2022-12-12.csv')
-    bhsdf = pd.read_csv(f'{BASE_PHENO_DIR}/background_history_sibling_2022-12-12.csv')
+    bhcdf = pd.read_csv(f'{base_pheno_dir}/background_history_child_2022-12-12.csv')
+    bhsdf = pd.read_csv(f'{base_pheno_dir}/background_history_sibling_2022-12-12.csv')
     
     bhcdf = bhcdf.loc[
         (bhcdf['age_at_eval_years'] <= 18) & 
@@ -58,7 +65,7 @@ def get_main_spark_data_for_GFMM():
     bhdf = bhdf[~bhdf.index.duplicated(keep=False)]
 
     ### RBS-R
-    rbsr = pd.read_csv(f'{BASE_PHENO_DIR}/rbsr_2022-12-12.csv')
+    rbsr = pd.read_csv(f'{base_pheno_dir}/rbsr_2022-12-12.csv')
     rbsr = rbsr.loc[
         (rbsr['age_at_eval_years'] <= 18) & 
         (rbsr['missing_values'] < 1) & 
@@ -73,7 +80,7 @@ def get_main_spark_data_for_GFMM():
     )
 
     ### CBCL 6-18
-    cbcl_2 = pd.read_csv(f'{BASE_PHENO_DIR}/cbcl_6_18_2022-12-12.csv')
+    cbcl_2 = pd.read_csv(f'{base_pheno_dir}/cbcl_6_18_2022-12-12.csv')
     cbcl_2 = cbcl_2.set_index('subject_sp_id', drop=True).drop(
         ['respondent_sp_id', 'family_sf_id', 'biomother_sp_id', 
          'biofather_sp_id', 'sex', 'current_depend_adult', 'asd', 

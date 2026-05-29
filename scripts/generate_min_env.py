@@ -41,6 +41,7 @@ min_deps = [
     "  - scipy",
     "  - scikit-learn",
     "  - pandas",
+    "  - python-dotenv",
 ]
 
 OUT_MIN.write_text("\n".join(min_deps) + "\n")

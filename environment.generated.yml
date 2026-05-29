@@ -221,6 +221,7 @@ dependencies:
     - nvidia-nvjitlink-cu12==12.3.101
     - nvidia-nvtx-cu12==12.1.105
     - pandas==1.5.3
+    - python-dotenv==1.0.1
     - partd==1.4.0
     - plac==1.4.2
     - pulp==2.8.0

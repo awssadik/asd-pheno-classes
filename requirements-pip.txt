@@ -99,3 +99,4 @@ xarray==2024.2.0
 xarray-einstats==0.7.0
 xgboost==2.0.3
 yte==1.5.4
+python-dotenv==1.0.1
